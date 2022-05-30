@@ -1,0 +1,44 @@
+{{ template "header.tmpl" . }}
+
+<a href="/">[Home]</a>
+{{ if gt .User.ID 0 }}
+  <a href="/user">{{ .User.Username }}</a>
+  <a href="/logout">Logout</a>
+{{ end }}
+
+<h1>{{ .Title }}</h1>
+
+<table>
+{{ range .Users }}
+  {{ if .Watchlists }}
+    <tr><td colspan=6>
+    {{ $name := .Username }}
+    {{ if .Name }}{{ $name = .Name }}{{ end }}
+    {{ if .URL }}
+      <a href="{{ .URL }}">{{ $name }}</a>
+    {{ else }}
+      {{ $name }}
+    {{ end }}
+    </td></tr>
+    {{ range .Watchlists }}
+      <tr>
+        <td><a href="{{ .Bill.URL }}">{{ .Bill.Number }}</a></td>
+        <td>{{ .Stance }}</td>
+        <td>{{ .Bill.Status }}</td>
+        <td>{{ .Bill.LastActionDate }}</td>
+        <td>
+          {{ $l := len .Bill.LastAction }}
+          {{ if gt $l 40 }}
+            {{ printf "%.40s..." .Bill.LastAction }}
+          {{ else }}
+            {{ .Bill.LastAction }}
+          {{ end }}
+        </td>
+        <td>{{ .Bill.Title }}</td>
+      </tr>
+    {{ end }}
+  {{ end }}
+{{ end }}
+</table>
+
+{{ template "footer.tmpl" . }}
