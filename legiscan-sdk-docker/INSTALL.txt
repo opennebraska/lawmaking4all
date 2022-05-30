@@ -1,0 +1,18 @@
+INSTALLATION STEPS
+
+1. Build the docker file
+
+    ./dockerfile-build.sh
+
+2. Configure the environment
+
+    cp .env.example .env
+    # Add the respective values to .env
+
+USAGE
+
+./docker-php.sh legiscan-bulk.php --bulk --import --yes
+
+SEE ALSO
+
+https://api.legiscan.com/dl/

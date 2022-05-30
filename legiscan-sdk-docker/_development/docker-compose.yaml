@@ -1,0 +1,23 @@
+
+services:
+
+  db:
+    # container_name: postgres
+    image: postgres  # https://hub.docker.com/_/postgres
+    restart: always
+    ports: [5432:5432]
+    environment:
+      # POSTGRES_DB: postgres
+      # POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+
+  adminer:
+    # container_name: adminer
+    image: adminer  # https://hub.docker.com/_/adminer
+    restart: always
+    ports: [8080:8080]
+
+  memcached:
+    # container_name: memcached
+    image: memcached
+    ports: [11211:11211]
